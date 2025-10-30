@@ -1,13 +1,13 @@
 %% Data-Driven Stabilization Using Prior Knowledge on Stabilizability and Controllability
 % Numerical Example
-% Date: October 20, 2025
+% Date: October 29, 2025
 % By: Tren M.J.T. Baltussen - Eindhoven University of Technology
 % and Amir Shakouri - University of Groningen
 % Contact: t.m.j.t.baltussen@tue.nl
 %
 % See the LICENSE file in the project root for full license information.
 
-% This script uses YALMIP and SeDuMi.
+% This script uses YALMIP and MOSEK.
 
 clear
 close all
@@ -39,7 +39,6 @@ T = 3;                          % Number of data samples
 
 %% Data Generation
 % Generate random input excitation (persistently exciting for identification)
-rng(1);
 U = 5*randn(m,T);
 
 % Simulate system to collect state data
@@ -54,7 +53,7 @@ X_p = X(:,2:end);               % Next states
 r = rank(X_);                   % Effective state rank
 
 %% Data-Driven Controller Computation
-% Transformation matrix - In this example I satisfies the condition.
+% Transformation matrix - In this example identity satisfies the condition.
 S = eye(n,n);
 
 % In general: use SVD.
@@ -75,7 +74,7 @@ F = [ X_hat * Theta_var == Theta_var' * X_hat', ...
       [X_hat * Theta_var, X_phat * Theta_var;
        Theta_var' * X_phat', X_hat * Theta_var] >= eye(2*r)*(1e-1) ];
 
-Sol = sdpsettings('solver', 'sedumi');
+Sol = sdpsettings('solver', 'mosek');
 optimize(F, [], Sol);
 
 Theta = value(Theta_var);

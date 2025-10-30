@@ -9,7 +9,6 @@ It supports:
 
 - Experiment design with random input trajectories
 - Data-driven controller synthesis using LMI-based methods
-- Monte Carlo analysis for dataset informativity
 - Closed-loop simulations for visualization
 
 ---
@@ -31,7 +30,7 @@ It supports:
 ## Requirements
 
 - MATLAB R2020b or later
-- [YALMIP](https://yalmip.github.io/) (for LMI optimization)
-- [SeDuMi](https://sedumi.ie.lehigh.edu/) (solver for LMIs)
+- [YALMIP](https://yalmip.github.io/) (toolbox for solver interface)
+- [MOSEK](https://www.mosek.com/) (solver for LMIs)
 
 ---
