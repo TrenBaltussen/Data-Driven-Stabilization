@@ -16,14 +16,14 @@ clc
 %% System Description - Three Tank System
 % Define tank areas and flow coefficients
 a1 = 1; a2 = 1; a3 = 1;
-k01 = 0.1; k12 = 0.5; k23 = 0.5;
+k1 = 0.1; k2 = 0.5; k3 = 0.5;
 x0 = [0; 0; 0];     % Initial states
 
 % Continuous-time state-space model
-A_c = [-(k01+k12)/a1,    k12/a1,     0;
-        k12/a2,          -k12/a2,    k23/a2;
-        0,               0,          -k23/a3];
-B_c = [0; 1/a2; 0];
+A_c = [-k1/a1,    0,         0;
+        0,        0,     k2/a2;
+        0,        0,    -k3/a3];
+B_c = [1/a1; -1/a2; 0];
 C_c = [1, 0, 0];
 D_c = 0;
 
